@@ -7,6 +7,21 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# React
+
+/build
+coverage/
+.DB_store
+
+# dependency directories
+
+bower_components
+
+# IDE settings
+
+.vscode/
+.idea/
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -40,6 +55,7 @@ build/Release
 
 # Dependency directories
 node_modules/
+node_modules
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
