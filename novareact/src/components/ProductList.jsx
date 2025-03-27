@@ -1,19 +1,37 @@
-import React from "react";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import ProductCard from './ProductCard';
 
-function ProductList({ products, addToCart }) {
+const ProductList = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/products');
+                setProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    if (loading) {
+        return <div className="text-center py-8">Loading...</div>;
+    }
+
     return (
-        <div>
-            <h2>Products</h2>
-            {products.map((product) => (
-                <div key={product.id} style={{ marginBottom: "1rem" }}>
-                    <span style={{ marginRight: "1rem" }}>
-                        {product.name} - {product.price}₮
-                    </span>
-                    <button onClick={() => addToCart(product)}>Add to Cart</button>
-                </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {products.map(product => (
+                <ProductCard key={product.id} product={product} />
             ))}
         </div>
     );
-}
+};
 
 export default ProductList;
