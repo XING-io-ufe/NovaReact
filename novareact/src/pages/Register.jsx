@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const { register } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await register(username, email, password);
+            await axios.post('http://localhost:3001/api/auth/register', {
+                username,
+                email,
+                password
+            });
+            navigate('/login');
         } catch (err) {
-            setError('Failed to register. Please try again.');
+            setError(err.response?.data?.message || 'Registration failed');
         }
     };
 
@@ -31,7 +35,7 @@ const Register = () => {
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="w-full px-3 py-2 border rounded"
+                        className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     />
                 </div>
@@ -42,7 +46,7 @@ const Register = () => {
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-3 py-2 border rounded"
+                        className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     />
                 </div>
@@ -53,13 +57,14 @@ const Register = () => {
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-3 py-2 border rounded"
+                        className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
+                        minLength="8"
                     />
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700"
+                    className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition-colors"
                 >
                     Register
                 </button>

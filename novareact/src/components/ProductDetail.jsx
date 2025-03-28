@@ -14,7 +14,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/products/${id}`);
+                const response = await axios.get(`http://localhost:3001/api/products/${id}`);
                 setProduct(response.data);
                 setSelectedColor(response.data.colors[0]);
             } catch (error) {

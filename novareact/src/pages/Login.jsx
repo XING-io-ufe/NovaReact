@@ -1,7 +1,7 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,10 +13,15 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await login(email, password);
+            const response = await axios.post('http://localhost:3001/api/auth/login', {
+                email,
+                password
+            });
+
+            login(response.data.token, response.data.userId);
             navigate('/profile');
         } catch (err) {
-            setError('Failed to login. Please check your credentials.');
+            setError(err.response?.data?.message || 'Login failed');
         }
     };
 
@@ -32,7 +37,7 @@ const Login = () => {
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-3 py-2 border rounded"
+                        className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     />
                 </div>
@@ -43,13 +48,13 @@ const Login = () => {
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-3 py-2 border rounded"
+                        className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     />
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700"
+                    className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition-colors"
                 >
                     Login
                 </button>

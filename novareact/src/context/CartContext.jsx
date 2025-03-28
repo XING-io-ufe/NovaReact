@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
     const fetchCart = async () => {
         if (!token) return;
         try {
-            const response = await axios.get('http://localhost:5000/api/cart');
+            const response = await axios.get('http://localhost:3001/api/cart');
             setCart(response.data);
         } catch (error) {
             console.error('Error fetching cart:', error);
@@ -24,7 +24,7 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = async (productId, color, quantity) => {
         try {
-            await axios.post('http://localhost:5000/api/cart', { productId, color, quantity });
+            await axios.post('http://localhost:3001/api/cart', { productId, color, quantity });
             await fetchCart();
         } catch (error) {
             console.error('Error adding to cart:', error);
@@ -34,7 +34,7 @@ export const CartProvider = ({ children }) => {
 
     const updateCartItem = async (itemId, quantity) => {
         try {
-            await axios.put(`http://localhost:5000/api/cart/${itemId}`, { quantity });
+            await axios.put(`http://localhost:3001/api/cart/${itemId}`, { quantity });
             await fetchCart();
         } catch (error) {
             console.error('Error updating cart item:', error);
@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {
 
     const removeFromCart = async (itemId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/cart/${itemId}`);
+            await axios.delete(`http://localhost:3001/api/cart/${itemId}`);
             await fetchCart();
         } catch (error) {
             console.error('Error removing from cart:', error);
