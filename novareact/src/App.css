@@ -1,110 +1,38 @@
-* {
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-}
-
-.Header {
-  padding: 20px;
-  background-color: rgb(178, 178, 178);
-}
-
-.Header .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0px 10px;
-}
-
-
-.Header .navbar ul {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.Header .navbar ul li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px 40px;
-}
-
-.Header .navbar ul li a {
-  color: black;
-}
-
-.h_content {
-  width: 100%;
-  height: 91vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: aliceblue;
-}
-
-.h_side {
-  margin-top: 50px;
-}
-
-.h_img {
-  margin-top: 50px;
-}
-
-.h_side h1 {
-  color: yellow;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 45px;
-}
-
-.h_side h2 {
-  color: black;
-  font-size: 35px
-}
-
-.h_side p {
-  margin: 20px 0px 20px 0px;
-}
-
-.h_side button {
-  padding: 10px 50px;
-  border-radius: 14px;
-  background-color: rgb(128, 232, 255);
-  border: none;
-  margin: 0px 20px;
-  cursor: pointer;
-}
-
 .App {
-  font-family: sans-serif;
-  margin: 0 auto;
-  padding: 1rem;
-  max-width: 800px;
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-.cart-button {
-  cursor: pointer;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+.App-link {
+  color: #61dafb;
 }
 
-.cart-button:hover {
-  background: #0056b3;
-}
-
-.cart-panel {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin-top: 1rem;
-  background-color: #f9f9f9;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

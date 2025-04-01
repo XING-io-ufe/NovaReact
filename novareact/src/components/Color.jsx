@@ -1,25 +1,26 @@
-import './../../App.css';
 import React, { useState } from 'react';
-
 
 function Color({ colors }) {
     const [activeColor, setActiveColor] = useState(null);
 
+    if (!colors || !Array.isArray(colors)) return null;
+
     const handleColorClick = (color) => {
         setActiveColor(color);
     };
+
     return (
-        <div className='Color'>
-            {colors.map(color => (
+        <ul className="flex gap-4">
+            {colors.map((color) => (
                 <li
                     key={color}
                     onClick={() => handleColorClick(color)}
-                    style={{ color: color, cursor: 'pointer', backgroundColor: color, borderRadius: '100px' }}
-                    className={activeColor === color ? 'active' : ''}
+                    style={{ backgroundColor: color }}
+                    className={`cursor-pointer rounded-full w-6 h-6 ${activeColor === color ? 'border border-black' : ''}`}
                 ></li>
-            ))
-            }
-        </div >
+            ))}
+        </ul>
     );
 }
+
 export default Color;
